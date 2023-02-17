@@ -1,0 +1,95 @@
+---
+import Base from "../layouts/Base.astro";
+
+interface paragraph {
+	lines: (string | emphasis | link)[][];
+}
+
+interface emphasis {
+	text: string;
+}
+
+interface link {
+	text: string;
+	href: string;
+}
+
+function isLink(element: emphasis | link): element is link {
+	return (element as link).href !== undefined;
+}
+
+const paragraphs: paragraph[] = [
+	{
+		lines: [["Welcome to", { href: "https://powerd6.org", text: "powerd6" }]],
+	},
+	{
+		lines: [
+			["We are working on a"],
+			["new and exciting way to"],
+			[{ text: "create" }, { text: "extend" }, "and", { text: "share" }],
+			["tabletop role-playing game"],
+		],
+	},
+	{
+		lines: [
+			["this website is currently"],
+			[
+				{
+					href: "https://github.com/power-d6/landing-page",
+					text: "under construction",
+				},
+			],
+			["but we would", { text: "love" }, "for you"],
+			[
+				"to follow",
+				{
+					href: "https://github.com/power-d6/",
+					text: "our development",
+				},
+			],
+			[
+				"and maybe contribute",
+				{ href: "https://github.com/power-d6/", text: "here" },
+			],
+		],
+	},
+];
+---
+
+<Base title="powerd6">
+	<main
+		class="h-screen w-screen flex flex-col justify-center align-middle text-5xl uppercase text-justify"
+	>
+		{
+			paragraphs.map((paragraph) => (
+				<div class="m-auto w-3/5">
+					{paragraph.lines.flatMap((line) => (
+						<div class="flex justify-between flex-wrap">
+							{line.flatMap((l) => {
+								switch (typeof l) {
+									case "string": {
+										return l.split(" ").map((word) => <p>{word}</p>);
+									}
+									case "object": {
+										if (isLink(l)) {
+											return (
+												<a
+													href={l.href}
+													class="text-emerald-300 text-justify justify-between self-stretch"
+												>
+													{l.text}
+												</a>
+											);
+										} else {
+											return <strong>{l.text}</strong>;
+										}
+									}
+								}
+							})}
+						</div>
+					))}
+				</div>
+			))
+		}
+	</main>
+</Base>

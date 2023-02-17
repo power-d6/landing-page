@@ -1,0 +1,14 @@
+---
+interface Props {
+  title: string;
+  subtitle?: string;
+}
+
+const { title, subtitle } = Astro.props;
+
+const titleParts = [title, subtitle];
+
+const output = titleParts.filter(Boolean).join(" - ");
+---
+
+<title>{output}</title>
