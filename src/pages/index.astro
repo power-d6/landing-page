@@ -2,7 +2,7 @@
 import Base from "../layouts/Base.astro";
 
 interface paragraph {
-	lines: (string | emphasis | link)[][];
+	lines: (string | emphasis | link)[];
 }
 
 interface emphasis {
@@ -20,37 +20,35 @@ function isLink(element: emphasis | link): element is link {
 
 const paragraphs: paragraph[] = [
 	{
-		lines: [["Welcome to", { href: "https://powerd6.org", text: "powerd6" }]],
+		lines: ["Welcome to", { href: "https://powerd6.org", text: "powerd6" }],
 	},
 	{
 		lines: [
-			["We are working on a"],
-			["new and exciting way to"],
-			[{ text: "create" }, { text: "extend" }, "and", { text: "share" }],
-			["tabletop role-playing game"],
+			"We are working on a new and exciting way to",
+			{ text: "create" },
+			",",
+			{ text: "extend" },
+			", and",
+			{ text: "share" },
+			"tabletop role-playing games",
 		],
 	},
 	{
 		lines: [
-			["this website is currently"],
-			[
-				{
-					href: "https://github.com/power-d6/landing-page",
-					text: "under construction",
-				},
-			],
-			["but we would", { text: "love" }, "for you"],
-			[
-				"to follow",
-				{
-					href: "https://github.com/power-d6/",
-					text: "our development",
-				},
-			],
-			[
-				"and maybe contribute",
-				{ href: "https://github.com/power-d6/", text: "here" },
-			],
+			"this website is currently",
+			{
+				href: "https://github.com/power-d6/landing-page",
+				text: "under construction",
+			},
+			"but we would",
+			{ text: "love" },
+			"for you to follow",
+			{
+				href: "https://github.com/power-d6/",
+				text: "our development",
+			},
+			"and maybe contribute",
+			{ href: "https://github.com/power-d6/", text: "here" },
 		],
 	},
 ];
@@ -63,31 +61,33 @@ const paragraphs: paragraph[] = [
 		{
 			paragraphs.map((paragraph) => (
 				<div class="m-auto w-3/5">
-					{paragraph.lines.flatMap((line) => (
-						<div class="flex justify-between flex-wrap">
-							{line.flatMap((l) => {
-								switch (typeof l) {
-									case "string": {
-										return l.split(" ").map((word) => <p>{word}</p>);
-									}
-									case "object": {
-										if (isLink(l)) {
-											return (
-												<a
-													href={l.href}
-													class="text-emerald-300 text-justify justify-between self-stretch"
-												>
-													{l.text}
-												</a>
-											);
-										} else {
-											return <strong>{l.text}</strong>;
-										}
+					<div class="flex justify-between flex-wrap gap-4">
+						{paragraph.lines.flatMap((line) => {
+							switch (typeof line) {
+								case "string": {
+									return line.split(" ").map((word) => <p>{word}</p>);
+								}
+								case "object": {
+									if (isLink(line)) {
+										return (
+											<a
+												href={line.href}
+												class="hover:text-emerald-300  transition-all duration-300"
+											>
+												{line.text}
+											</a>
+										);
+									} else {
+										return (
+											<strong class="hover:text-indigo-300 transition-all duration-300">
+												{line.text}
+											</strong>
+										);
 									}
 								}
-							})}
-						</div>
-					))}
+							}
+						})}
+					</div>
 				</div>
 			))
 		}
