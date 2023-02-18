@@ -1,95 +1,56 @@
 ---
+import FancyText from "../components/FancyText.astro";
 import Base from "../layouts/Base.astro";
-
-interface paragraph {
-	lines: (string | emphasis | link)[];
-}
-
-interface emphasis {
-	text: string;
-}
-
-interface link {
-	text: string;
-	href: string;
-}
-
-function isLink(element: emphasis | link): element is link {
-	return (element as link).href !== undefined;
-}
-
-const paragraphs: paragraph[] = [
-	{
-		lines: ["Welcome to", { href: "https://powerd6.org", text: "powerd6" }],
-	},
-	{
-		lines: [
-			"We are working on a new and exciting way to",
-			{ text: "create" },
-			",",
-			{ text: "extend" },
-			", and",
-			{ text: "share" },
-			"tabletop role-playing games",
-		],
-	},
-	{
-		lines: [
-			"This website is currently",
-			{
-				href: "https://github.com/power-d6/landing-page",
-				text: "under construction",
-			},
-			"but we would",
-			{ text: "love" },
-			"for you to follow",
-			{
-				href: "https://github.com/power-d6/",
-				text: "our development",
-			},
-			"and maybe contribute",
-			{ href: "https://github.com/power-d6/", text: "here" },
-		],
-	},
-];
 ---
 
 <Base title="powerd6">
-	<main
-		class="h-screen w-screen flex flex-col justify-center align-middle lg:text-5xl md:text-2xl text-lg uppercase text-justify dark:bg-zinc-800 dark:text-white"
-	>
-		{
-			paragraphs.map((paragraph) => (
-				<div class="lg:m-auto mx-auto my-8 lg:w-3/5 w-4/5">
-					<div class="flex justify-between flex-wrap lg:gap-4 gap-1">
-						{paragraph.lines.flatMap((line) => {
-							switch (typeof line) {
-								case "string": {
-									return line.split(" ").map((word) => <p>{word}</p>);
-								}
-								case "object": {
-									if (isLink(line)) {
-										return (
-											<a
-												href={line.href}
-												class="font-bold text-emerald-600 hover:text-emerald-300  transition-all duration-300"
-											>
-												{line.text}
-											</a>
-										);
-									} else {
-										return (
-											<strong class="font-bold text-amber-600 hover:text-amber-300 transition-all duration-300">
-												{line.text}
-											</strong>
-										);
-									}
-								}
-							}
-						})}
-					</div>
-				</div>
-			))
-		}
+	<main class="h-screen flex justify-center align-middle">
+		<section
+			id="anouncement"
+			class="m-auto lg:w-3/5 w-4/5 lg:text-5xl md:text-2xl text-lg uppercase text-justify"
+		>
+			<FancyText
+				paragraphs={[
+					{
+						words: [
+							"Welcome to",
+							{ href: "https://powerd6.org", text: "powerd6" },
+						],
+					},
+					{
+						words: [
+							"We are working on a new and exciting way to",
+							{ text: "create", color: "green" },
+							",",
+							{ text: "extend", color: "violet" },
+							", and",
+							{ text: "share", color: "yellow" },
+							"tabletop role-playing games",
+						],
+					},
+					{
+						words: [
+							"This website is currently",
+							{
+								href: "https://github.com/power-d6/landing-page",
+								text: "under construction",
+							},
+							"but we would",
+							{ text: "love", color: "rose" },
+							"for you to follow",
+							{
+								href: "https://github.com/power-d6/",
+								text: "our development",
+							},
+							"and maybe contribute",
+							{
+								href: "https://github.com/power-d6/.github/blob/main/CONTRIBUTING.md",
+								text: "here",
+							},
+						],
+					},
+				]}
+			/>
+		</section>
 	</main>
 </Base>
