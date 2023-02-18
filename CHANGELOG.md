@@ -8,3 +8,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 - Add page announcing that the project is under-construction
+- Add collection of links to other important pages
