@@ -30,7 +30,7 @@ function isLink(element: string | emphasis | link): element is link {
 const { paragraphs } = Astro.props;
 ---
 
-<div class="mx-auto md:m-auto flex flex-col lg:gap-8 gap-2">
+<div class="mx-auto md:m-auto flex flex-col md:gap-8 gap-2">
   {
     paragraphs.flatMap((paragraph) => (
       <div class="flex justify-between flex-wrap lg:gap-4 gap-1">
