@@ -1,0 +1,64 @@
+---
+interface Props {
+  paragraphs: paragraph[];
+}
+
+interface paragraph {
+  words: (string | emphasis | link)[];
+}
+
+interface emphasis {
+  text: string;
+  color: string;
+}
+
+interface link {
+  text: string;
+  href: string;
+}
+
+function isText(element: string | emphasis | link): element is string {
+  return typeof element == "string";
+}
+function isEmphasis(element: string | emphasis | link): element is emphasis {
+  return (element as emphasis).color !== undefined;
+}
+function isLink(element: string | emphasis | link): element is link {
+  return (element as link).href !== undefined;
+}
+
+const { paragraphs } = Astro.props;
+---
+
+<div class="mx-auto md:m-auto flex flex-col lg:gap-8 gap-2">
+  {
+    paragraphs.flatMap((paragraph) => (
+      <div class="flex justify-between flex-wrap lg:gap-4 gap-1">
+        {paragraph.words.flatMap((w) => {
+          if (isText(w)) {
+            return w.split(" ").map((word) => <p>{word}</p>);
+          }
+          if (isEmphasis(w)) {
+            return (
+              <strong
+                class={`font-bold transition-all duration-300 text-${w.color}-700 dark:text-${w.color}-200 hover:text-${w.color}-500`}
+              >
+                {w.text}
+              </strong>
+            );
+          }
+          if (isLink(w)) {
+            return (
+              <a
+                href={w.href}
+                class="font-bold transition-all duration-300 text-emerald-700 dark:text-emerald-200 hover:text-emerald-500"
+              >
+                {w.text}
+              </a>
+            );
+          }
+        })}
+      </div>
+    ))
+  }
+</div>

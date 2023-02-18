@@ -1,0 +1,56 @@
+---
+import FancyText from "../components/FancyText.astro";
+import Base from "../layouts/Base.astro";
+---
+
+<Base title="powerd6">
+	<main class="h-screen flex justify-center align-middle">
+		<section
+			id="anouncement"
+			class="m-auto lg:w-3/5 w-4/5 lg:text-5xl md:text-2xl text-lg uppercase text-justify"
+		>
+			<FancyText
+				paragraphs={[
+					{
+						words: [
+							"Welcome to",
+							{ href: "https://powerd6.org", text: "powerd6" },
+						],
+					},
+					{
+						words: [
+							"We are working on a new and exciting way to",
+							{ text: "create", color: "green" },
+							",",
+							{ text: "extend", color: "violet" },
+							", and",
+							{ text: "share", color: "yellow" },
+							"tabletop role-playing games",
+						],
+					},
+					{
+						words: [
+							"This website is currently",
+							{
+								href: "https://github.com/power-d6/landing-page",
+								text: "under construction",
+							},
+							"but we would",
+							{ text: "love", color: "rose" },
+							"for you to follow",
+							{
+								href: "https://github.com/power-d6/",
+								text: "our development",
+							},
+							"and maybe contribute",
+							{
+								href: "https://github.com/power-d6/.github/blob/main/CONTRIBUTING.md",
+								text: "here",
+							},
+						],
+					},
+				]}
+			/>
+		</section>
+	</main>
+</Base>
