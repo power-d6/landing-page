@@ -28,7 +28,7 @@ jobs:
       - run: npm test
       - name: Build website
         run: |-
-          npm build
+          npm run build
       - name: Upload website
         uses: actions/upload-artifact@v3
         with:
