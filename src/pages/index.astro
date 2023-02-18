@@ -35,7 +35,7 @@ const paragraphs: paragraph[] = [
 	},
 	{
 		lines: [
-			"this website is currently",
+			"This website is currently",
 			{
 				href: "https://github.com/power-d6/landing-page",
 				text: "under construction",
@@ -56,12 +56,12 @@ const paragraphs: paragraph[] = [
 
 <Base title="powerd6">
 	<main
-		class="h-screen w-screen flex flex-col justify-center align-middle text-5xl uppercase text-justify"
+		class="h-screen w-screen flex flex-col justify-center align-middle lg:text-5xl md:text-2xl text-lg uppercase text-justify dark:bg-zinc-800 dark:text-white"
 	>
 		{
 			paragraphs.map((paragraph) => (
-				<div class="m-auto w-3/5">
-					<div class="flex justify-between flex-wrap gap-4">
+				<div class="lg:m-auto mx-auto my-8 lg:w-3/5 w-4/5">
+					<div class="flex justify-between flex-wrap lg:gap-4 gap-1">
 						{paragraph.lines.flatMap((line) => {
 							switch (typeof line) {
 								case "string": {
@@ -72,14 +72,14 @@ const paragraphs: paragraph[] = [
 										return (
 											<a
 												href={line.href}
-												class="hover:text-emerald-300  transition-all duration-300"
+												class="font-bold text-emerald-600 hover:text-emerald-300  transition-all duration-300"
 											>
 												{line.text}
 											</a>
 										);
 									} else {
 										return (
-											<strong class="hover:text-indigo-300 transition-all duration-300">
+											<strong class="font-bold text-amber-600 hover:text-amber-300 transition-all duration-300">
 												{line.text}
 											</strong>
 										);
