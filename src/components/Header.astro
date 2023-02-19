@@ -37,14 +37,14 @@ const { links } = Astro.props;
   >
     <button
       class="px-3 py-2 rounded bg-emerald-300 hover:bg-emerald-500 text-slate-400 dark:text-slate-700"
-      @click="open = ! open"
+      {...{'@click':'open=!open'}}
     >
       Menu
     </button>
     <nav
       class="flex flex-col gap-2 justify-between items-end"
       x-show="open"
-      @click.outside="open = false"
+      {...{'@click.outside':'open=false'}}
     >
       {
         links.map((link: link) => (
