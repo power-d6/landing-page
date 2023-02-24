@@ -21,7 +21,19 @@ const { title, subtitle } = Astro.props;
   <body
     class="bg-slate-50 dark:bg-zinc-800 text-stone-900 dark:text-white min-h-screen w-screen"
   >
-    <Header />
+    <Header
+      links={[
+        { href: "https://specification.powerd6.org", text: "Specification" },
+        {
+          href: "https://github.com/power-d6/.github/blob/main/CODE_OF_CONDUCT.md",
+          text: "Code of conduct",
+        },
+        {
+          href: "https://github.com/power-d6/.github/blob/main/CONTRIBUTING.md",
+          text: "Contributing",
+        },
+      ]}
+    />
     <slot />
   </body>
 </html>
